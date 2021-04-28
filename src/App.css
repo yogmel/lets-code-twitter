@@ -1,5 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 30px;
 }
 
 .App-logo {
@@ -7,32 +15,69 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.users-container {
+  padding: 20px 30px;
+  background-color: #7070FF;
   color: white;
+  border-radius: 5px;
 }
 
-.App-link {
-  color: #61dafb;
+.tweets-tabs {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.tweet-card {
+  margin: 20px 0;
+  border-radius: 5px;
+  padding: 20px 40px;
+  background-color: #FAFAFF;
+  box-shadow: 0px 4px 7px rgba(0,0,0,.09);
+}
+
+.tweet-card__meta {
+  display: flex;
+  justify-content: space-between;
+  color: #7070FF;
+}
+
+.tweet-card__meta-author {
+  color: #7070FF;
+}
+
+.tweet-card__message {
+  text-align: left;
+  color: #00007A;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: space-evenly;
+  color: #7070FF;
+}
+
+.icon-container__contents {
+  display: flex;
+  align-items: center;
+}
+
+.icon-container__number {
+  margin: 0;
+  margin-left: 10px;
+}
+
+/* Reactstrap */
+.nav-tabs {
+  border-bottom: none;
+}
+
+.nav-tabs .nav-link {
+  color: #7070FF;
+  border: 1px solid #7070FF;
+}
+
+.tab-content > .active {
+  padding: 0 40px;
+  border: 1px solid #7070FF;
 }
