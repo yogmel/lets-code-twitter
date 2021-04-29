@@ -6,7 +6,6 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 
 const TweetContainer = (props) => {
-  console.log("props", props);
   const {
     comments,
     message,

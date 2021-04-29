@@ -1,13 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import React, { useState } from "react";
-import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
-import { TweetContainer } from "./components";
+import React from "react";
+import { TweetContainer, LoggedUser } from "./components";
+import { Route, Link } from 'react-router-dom';
 
 import { tweets, users } from "./data";
 
 function App() {
-  const [tabAtiva, setTabAtiva] = useState("0");
+  const idUsuarioLogado = 0;
 
   const tweetsDataFormatada = tweets.map((tweet) => {
     const dataFormatada = `${tweet.date.getDate() + 1}/${tweet.date.getMonth()}/${tweet.date.getFullYear()}`;
@@ -28,42 +28,31 @@ function App() {
     };
   });
 
+  const tweetsMeuPerfil = tweetsComAutor.filter((tweet) => {
+    return idUsuarioLogado === tweet.author.id;
+  });
+
   return (
     <div className="App">
-      {/* widget de usuário logado */}
-      <div className="users-container">
-        <p>Usuário logado:</p>
-        <h3>User</h3>
-        <strong>@username</strong>
-      </div>
+      <LoggedUser
+        users={users}
+        idUsuarioLogado={idUsuarioLogado}
+      />
 
-      {/* tabs */}
       <div className="tweets-tabs">
-        <Nav tabs>
-          <NavItem>
-            <NavLink
-              onClick={() => { setTabAtiva("0") }}
-            >
-              Geral
-						</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              onClick={() => { setTabAtiva("1") }}
-            >
-              Meu Perfil
-						</NavLink>
-          </NavItem>
-        </Nav>
-        <TabContent activeTab={tabAtiva}>
-          <TabPane tabId="0">
-            {/* componente do tweet */}
-            {tweetsComAutor.map((tweet) => <TweetContainer key={tweet.id} tweet={tweet} />)}
-          </TabPane>
-          <TabPane tabId="1">
-            <div>Tab meu perfil</div>
-          </TabPane>
-        </TabContent>
+        <ul>
+          <li><Link to="/geral">Geral</Link></li>
+          <li><Link to="/meu-perfil">Meu Perfil</Link></li>
+          <li><Link to="/meus-favoritos">Favoritos</Link></li>
+        </ul>
+
+        <Route path="/geral">
+          {tweetsComAutor.map((tweet) => <TweetContainer key={tweet.id} tweet={tweet} />)}
+        </Route>
+
+        <Route path="/meu-perfil">
+          {tweetsMeuPerfil.map((tweet) => <TweetContainer key={tweet.id} tweet={tweet} />)}
+        </Route>
       </div>
 
     </div>

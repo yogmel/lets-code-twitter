@@ -16,7 +16,7 @@ export const users = [
     username: "mell",
     name: "Mellina Yonashiro",
     myTweets: [tweets[0], tweets[1]],
-    favoriteTweets: []
+    favoriteTweets: [0, 1, 2]
   },
   {
     id: 1,
