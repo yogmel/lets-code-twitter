@@ -17,7 +17,7 @@
 
 .users-container {
   padding: 20px 30px;
-  background-color: #7070FF;
+  background-color: #7070ff;
   color: white;
   border-radius: 5px;
 }
@@ -32,29 +32,29 @@
   margin: 20px 0;
   border-radius: 5px;
   padding: 20px 40px;
-  background-color: #FAFAFF;
-  box-shadow: 0px 4px 7px rgba(0,0,0,.09);
+  background-color: #fafaff;
+  box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.09);
 }
 
 .tweet-card__meta {
   display: flex;
   justify-content: space-between;
-  color: #7070FF;
+  color: #7070ff;
 }
 
 .tweet-card__meta-author {
-  color: #7070FF;
+  color: #7070ff;
 }
 
 .tweet-card__message {
   text-align: left;
-  color: #00007A;
+  color: #00007a;
 }
 
 .icon-container {
   display: flex;
   justify-content: space-evenly;
-  color: #7070FF;
+  color: #7070ff;
 }
 
 .icon-container__contents {
@@ -73,11 +73,17 @@
 }
 
 .nav-tabs .nav-link {
-  color: #7070FF;
-  border: 1px solid #7070FF;
+  color: #7070ff;
+  border: 1px solid #7070ff;
+  cursor: pointer;
 }
 
 .tab-content > .active {
   padding: 0 40px;
-  border: 1px solid #7070FF;
+  border: 1px solid #7070ff;
+}
+
+.nav-tabs .nav-link:focus,
+.nav-tabs .nav-link:hover {
+  border-color: inherit;
 }

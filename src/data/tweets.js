@@ -23,8 +23,8 @@ export const tweets = [
     message: "mensagem de até 301 caracteres",
     date: new Date('December 17, 2020'),
     author: 0,
-    usersFavorited: [],
-    comments: [1]
+    usersFavorited: [0],
+    comments: []
   },
   {
     id: 2,
