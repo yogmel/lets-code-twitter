@@ -1,19 +1,20 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
 import React from "react";
-import { TweetContainer, LoggedUser } from "./components";
-import { Route, Link } from 'react-router-dom';
-
+import { Link, Route } from "react-router-dom";
+import "./App.css";
+import { LoggedUser, Login, PrivateRoute, TweetContainer } from "./components";
 import { tweets, users } from "./data";
 
 function App() {
   const idUsuarioLogado = 0;
 
   const tweetsDataFormatada = tweets.map((tweet) => {
-    const dataFormatada = `${tweet.date.getDate() + 1}/${tweet.date.getMonth()}/${tweet.date.getFullYear()}`;
+    const dataFormatada = `${
+      tweet.date.getDate() + 1
+    }/${tweet.date.getMonth()}/${tweet.date.getFullYear()}`;
     return {
       ...tweet,
-      date: dataFormatada
+      date: dataFormatada,
     };
   });
 
@@ -24,7 +25,7 @@ function App() {
 
     return {
       ...tweet,
-      author: user
+      author: user,
     };
   });
 
@@ -34,27 +35,37 @@ function App() {
 
   return (
     <div className="App">
-      <LoggedUser
-        users={users}
-        idUsuarioLogado={idUsuarioLogado}
-      />
+      <LoggedUser users={users} idUsuarioLogado={idUsuarioLogado} />
 
       <div className="tweets-tabs">
         <ul>
-          <li><Link to="/geral">Geral</Link></li>
-          <li><Link to="/meu-perfil">Meu Perfil</Link></li>
-          <li><Link to="/meus-favoritos">Favoritos</Link></li>
+          <li>
+            <Link to="/geral">Geral</Link>
+          </li>
+          <li>
+            <Link to="/meu-perfil">Meu Perfil</Link>
+          </li>
+          <li>
+            <Link to="/meus-favoritos">Favoritos</Link>
+          </li>
         </ul>
 
-        <Route path="/geral">
-          {tweetsComAutor.map((tweet) => <TweetContainer key={tweet.id} tweet={tweet} />)}
-        </Route>
+        <PrivateRoute path="/geral" role="admin">
+          {tweetsComAutor.map((tweet) => (
+            <TweetContainer key={tweet.id} tweet={tweet} />
+          ))}
+        </PrivateRoute>
 
-        <Route path="/meu-perfil">
-          {tweetsMeuPerfil.map((tweet) => <TweetContainer key={tweet.id} tweet={tweet} />)}
+        <PrivateRoute path="/meu-perfil" role="user">
+          {tweetsMeuPerfil.map((tweet) => (
+            <TweetContainer key={tweet.id} tweet={tweet} />
+          ))}
+        </PrivateRoute>
+
+        <Route path="/login">
+          <Login />
         </Route>
       </div>
-
     </div>
   );
 }
