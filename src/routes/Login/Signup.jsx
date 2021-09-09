@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { signUp } from "./../../db/firebaseConfig";
+import { useHistory } from "react-router-dom";
 
 function Signup(props) {
   const [username, setUsername] = useState("");
@@ -8,9 +9,18 @@ function Signup(props) {
   const [error, setError] = useState("");
 
   const { toggleView } = props;
+  const history = useHistory();
+
+  const setLoginError = (err) => {
+    setError(err);
+  };
+
+  const redirectToHome = () => {
+    history.push("/geral");
+  };
 
   const createUser = () => {
-    signUp(username, email, password);
+    signUp(username, email, password, redirectToHome, setLoginError);
   };
 
   return (
@@ -43,7 +53,7 @@ function Signup(props) {
           Já tenho cadastro
         </button>
         <button onClick={createUser} className="btn btn-primary">
-          Entrar
+          Cadastrar
         </button>
         {error && <p className="login-error">{error}</p>}
       </section>

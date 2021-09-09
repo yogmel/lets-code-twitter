@@ -11,10 +11,10 @@ const LoginContainer = () => {
   };
 
   return (
-    <>
+    <div>
       {isLogin && <Login toggleView={toggleView} />}
       {!isLogin && <Signup toggleView={toggleView} />}
-    </>
+    </div>
   );
 };
 

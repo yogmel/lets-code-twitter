@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import { Route } from "react-router-dom";
 import "./App.css";
-import { PrivateRoute, TweetContainer } from "./routes";
+import { PrivateRoute, Tweets } from "./routes";
 import { tweets, users } from "./data";
 import { LoginContainer as Login } from "./routes/Login";
 
@@ -36,37 +36,13 @@ function App() {
 
   return (
     <div className="App">
-      {/* <LoggedUser users={users} idUsuarioLogado={idUsuarioLogado} /> */}
+      <PrivateRoute path="/geral">
+        <Tweets tweets={tweetsMeuPerfil} />
+      </PrivateRoute>
 
-      <div className="tweets-tabs">
-        {/* <ul>
-          <li>
-            <Link to="/geral">Geral</Link>
-          </li>
-          <li>
-            <Link to="/meu-perfil">Meu Perfil</Link>
-          </li>
-          <li>
-            <Link to="/meus-favoritos">Favoritos</Link>
-          </li>
-        </ul> */}
-
-        <PrivateRoute path="/geral" role="admin">
-          {tweetsComAutor.map((tweet) => (
-            <TweetContainer key={tweet.id} tweet={tweet} />
-          ))}
-        </PrivateRoute>
-
-        <PrivateRoute path="/meu-perfil" role="user">
-          {tweetsMeuPerfil.map((tweet) => (
-            <TweetContainer key={tweet.id} tweet={tweet} />
-          ))}
-        </PrivateRoute>
-
-        <Route path="/login">
-          <Login />
-        </Route>
-      </div>
+      <Route path="/login">
+        <Login />
+      </Route>
     </div>
   );
 }

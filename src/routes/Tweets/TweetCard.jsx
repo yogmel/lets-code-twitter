@@ -5,7 +5,7 @@ import {
   faComment as faCommentRegular,
 } from "@fortawesome/free-regular-svg-icons";
 
-const TweetContainer = (props) => {
+function TweetCard(props) {
   const {
     comments,
     message,
@@ -47,6 +47,6 @@ const TweetContainer = (props) => {
       </div>
     </div>
   );
-};
+}
 
-export default TweetContainer;
+export default TweetCard;

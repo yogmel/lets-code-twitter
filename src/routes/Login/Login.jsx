@@ -1,18 +1,33 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { signInWithGoogle } from "./../../db/firebaseConfig";
+import {
+  signInWithGoogle,
+  loginWithEmailAndPassword,
+} from "./../../db/firebaseConfig";
 
 function Login(props) {
   const [error, setError] = useState("");
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const { toggleView } = props;
 
   const history = useHistory();
-  const authenticateWithGoogle = () => {
-    signInWithGoogle();
+
+  const setLoginError = (err) => {
+    setError(err);
+  };
+
+  const redirectToHome = () => {
     history.push("/geral");
+  };
+
+  const authenticateWithGoogle = () => {
+    signInWithGoogle(redirectToHome, setLoginError);
+  };
+
+  const login = () => {
+    loginWithEmailAndPassword(email, password, redirectToHome, setLoginError);
   };
 
   return (
@@ -20,10 +35,10 @@ function Login(props) {
       <h2 className="login-title">Faça seu login</h2>
       <section className="login-form">
         <div className="input-group">
-          <label>Username</label>
+          <label>Email</label>
           <input
             placeholder="Insira seu usuario"
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="input-group">
@@ -42,7 +57,7 @@ function Login(props) {
           Entrar com Google
         </button>
 
-        <button onClick={authenticateWithGoogle} className="btn btn-primary">
+        <button onClick={login} className="btn btn-primary">
           Entrar
         </button>
         {error && <p className="login-error">{error}</p>}

@@ -1,10 +1,10 @@
 import { Redirect, Route } from "react-router-dom";
-import verifyAuthentication from "./Login/login-functions";
+import { getAuthUser } from "./../db/firebaseConfig";
 
 const PrivateRoute = ({ children, role, ...rest }) => (
   <Route
     {...rest}
-    render={() => (verifyAuthentication(role) ? children : <Redirect to="/" />)}
+    render={() => (getAuthUser() ? children : <Redirect to="/login" />)}
   />
 );
 export default PrivateRoute;
