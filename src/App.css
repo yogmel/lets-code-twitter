@@ -2,6 +2,63 @@
   box-sizing: border-box;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@700&family=Urbanist:wght@100;300;500;900&display=swap");
+
+body {
+  margin: 0;
+  font-family: "Urbanist", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Kanit", sans-serif;
+}
+
+.btn {
+  padding: 10px;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+.btn-primary {
+  text-transform: uppercase;
+  background-color: #00ffe7;
+  border: 3px solid black;
+  color: #000;
+}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus {
+  background-color: #00cfc1;
+  border-color: black;
+  color: #fff;
+}
+
+.btn-link {
+  text-decoration: underline;
+  color: #00cfc1;
+}
+
+.btn-link:hover,
+.btn-link:active,
+.btn-link:focus {
+  color: #007e75;
+}
+
 .App {
   text-align: center;
   display: flex;

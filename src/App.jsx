@@ -1,9 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
-import { Link, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import "./App.css";
-import { LoggedUser, Login, PrivateRoute, TweetContainer } from "./components";
+import { PrivateRoute, TweetContainer } from "./routes";
 import { tweets, users } from "./data";
+import { LoginContainer as Login } from "./routes/Login";
 
 function App() {
   const idUsuarioLogado = 0;
@@ -35,10 +36,10 @@ function App() {
 
   return (
     <div className="App">
-      <LoggedUser users={users} idUsuarioLogado={idUsuarioLogado} />
+      {/* <LoggedUser users={users} idUsuarioLogado={idUsuarioLogado} /> */}
 
       <div className="tweets-tabs">
-        <ul>
+        {/* <ul>
           <li>
             <Link to="/geral">Geral</Link>
           </li>
@@ -48,7 +49,7 @@ function App() {
           <li>
             <Link to="/meus-favoritos">Favoritos</Link>
           </li>
-        </ul>
+        </ul> */}
 
         <PrivateRoute path="/geral" role="admin">
           {tweetsComAutor.map((tweet) => (
