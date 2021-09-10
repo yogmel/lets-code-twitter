@@ -27,6 +27,14 @@ firebase.initializeApp({
   appId: "1:665651747794:web:cc7aad1a64bbfab686c60b",
 });
 
+const addUserToLocalStorage = (user) => {
+  localStorage.setItem("loggedUser", user.toString());
+};
+
+const removeUserToLocalStorage = () => {
+  localStorage.removeItem("loggedUser");
+};
+
 /* Database functions */
 const database = getDatabase();
 export const writeNewUser = (uid, username, email) => {
@@ -56,21 +64,10 @@ export const writeNewTweet = async (message) => {
       uid: auth.uid,
       username: user.username,
     },
-    usersFavorited: [],
-    comments: [],
+    usersFavorited: [user.username],
+    comments: {},
   });
 };
-
-// export const getAllTweetsOnce = async () => {
-//   const databaseRef = ref(database);
-//   const tweets = await get(child(databaseRef, "tweets"));
-//   if (tweets.exists()) {
-//     return tweets.val();
-//   }
-
-//   console.log("No data available");
-//   return null;
-// };
 
 export const watchAllTweets = async (successCallback) => {
   const tweets = query(ref(database, "tweets"), orderByChild("time"));
@@ -98,6 +95,7 @@ export const getCurrentUser = async () => {
 
 export const signOut = (onSuccess) => {
   auth.signOut();
+  removeUserToLocalStorage();
   onSuccess();
 };
 
@@ -106,6 +104,7 @@ export const signInWithGoogle = (successCallback, errorCallback) => {
     .then((userCredential) => {
       const user = userCredential.user;
       writeNewUser(user.uid, user.displayName, user.email);
+      addUserToLocalStorage(JSON.stringify(user));
       successCallback();
     })
     .catch((error) => {
@@ -131,6 +130,7 @@ export const signUp = (
     .then((userCredential) => {
       const user = userCredential.user;
       writeNewUser(user.uid, username, user.email);
+      addUserToLocalStorage(JSON.stringify(user));
       successCallback();
     })
     .catch((error) => {
@@ -154,7 +154,7 @@ export const loginWithEmailAndPassword = (
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      console.log("user", user);
+      addUserToLocalStorage(JSON.stringify(user));
       successCallback();
     })
     .catch((error) => {

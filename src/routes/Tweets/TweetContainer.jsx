@@ -1,31 +1,50 @@
+import "./TweetContainer.css";
 import { LoggedUser, Navbar } from "./../../components";
 import TweetCard from "./TweetCard";
-import "./TweetContainer.css";
-import { useState, useEffect } from "react";
-import { watchAllTweets } from "./../../db/firebaseConfig";
+import { useEffect, useState, useContext } from "react";
 import AddTweetModal from "./AddTweetModal";
+import { TweetsContext } from "../../context";
+import { getAuthUser, getCurrentUser } from "./../../db/firebaseConfig";
 
 const TweetContainer = (props) => {
   const [modal, setModal] = useState(false);
-  const [tweets, setTweets] = useState([]);
+  const [filteredTweets, setFilteredTweets] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
 
-  const storeTweets = (tweetsObj) => {
-    const tweets = [];
-    for (const prop in tweetsObj) {
-      tweets.unshift(tweetsObj[prop]);
-    }
-    setTweets(tweets);
-  };
+  const { visibility } = props;
 
-  const fetchTweets = async () => {
-    watchAllTweets(storeTweets);
+  const toggle = () => setModal(!modal);
+
+  const allTweets = useContext(TweetsContext);
+  const authUser = getAuthUser();
+
+  const fetchUser = async () => {
+    const user = await getCurrentUser();
+    setCurrentUser(user);
   };
 
   useEffect(() => {
-    fetchTweets();
+    fetchUser();
   }, []);
 
-  const toggle = () => setModal(!modal);
+  useEffect(() => {
+    let tweets = [];
+    if (visibility === "all") {
+      tweets = allTweets;
+    }
+    if (visibility === "currentUser") {
+      tweets = allTweets.filter((tweet) => tweet.author.uid === authUser?.uid);
+    }
+    if (visibility === "currentUserFaves") {
+      tweets = allTweets.filter((tweet) => {
+        return (
+          tweet.usersFavorited &&
+          tweet.usersFavorited?.includes(currentUser?.username)
+        );
+      });
+    }
+    setFilteredTweets(tweets);
+  }, [allTweets, authUser?.uid, currentUser?.username, visibility]);
 
   return (
     <>
@@ -37,8 +56,9 @@ const TweetContainer = (props) => {
       </aside>
       <section className="tweets-container">
         <Navbar />
-        {tweets.length > 0 &&
-          tweets.map((tweet) => <TweetCard tweet={tweet} />)}
+        {filteredTweets.map((tweet) => (
+          <TweetCard key={tweet.time} tweet={tweet} />
+        ))}
       </section>
 
       <AddTweetModal modal={modal} toggle={toggle} />

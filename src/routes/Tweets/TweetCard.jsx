@@ -7,7 +7,7 @@ import {
 
 function TweetCard(props) {
   const {
-    comments = [],
+    comments = {},
     message,
     usersFavorited = [],
     date: { day, month, year },
@@ -15,7 +15,7 @@ function TweetCard(props) {
   } = props.tweet;
 
   const temFavoritos = usersFavorited.length > 0;
-  const temComentarios = comments.length > 0;
+  const temComentarios = Object.keys(comments).length > 0;
 
   return (
     <div className="tweet-card">

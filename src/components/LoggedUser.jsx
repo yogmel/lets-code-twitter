@@ -9,9 +9,19 @@ const LoggedUser = () => {
   const history = useHistory();
 
   const fetchUser = async () => {
-    const currentUser = await getCurrentUser();
-    console.log("currentUser", currentUser);
-    setCurrentUser(currentUser);
+    const user = localStorage.getItem("loggedUser");
+    if (user) {
+      const parsedUser = JSON.parse(user);
+      setCurrentUser(parsedUser);
+    }
+    if (!user) {
+      try {
+        const currentUser = await getCurrentUser();
+        setCurrentUser(currentUser);
+      } catch (e) {
+        console.log("deu ruim", e);
+      }
+    }
   };
 
   useEffect(() => {
@@ -29,7 +39,7 @@ const LoggedUser = () => {
   return (
     <div className="users-container">
       <p>Usuário logado:</p>
-      <h3>{currentUser.username}</h3>
+      <h3>{currentUser.displayName ?? currentUser.username}</h3>
       <strong>{currentUser.email}</strong>
       <button className="btn btn-link" onClick={signOutUser}>
         Sair
