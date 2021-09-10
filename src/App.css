@@ -2,6 +2,87 @@
   box-sizing: border-box;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@700&family=Urbanist:wght@100;300;500;900&display=swap");
+
+body {
+  margin: 0;
+  font-family: "Urbanist", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Kanit", sans-serif;
+}
+
+.btn {
+  padding: 10px;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+.btn-primary {
+  text-transform: uppercase;
+  background-color: #00ffe7;
+  border: 3px solid black;
+  color: #000;
+}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus {
+  background-color: #00cfc1;
+  border-color: black;
+  color: #fff;
+}
+
+.btn-primary-inverted {
+  text-transform: uppercase;
+  border: 3px solid black;
+  color: #000;
+}
+
+.btn-primary-inverted:hover,
+.btn-primary-inverted:active,
+.btn-primary-inverted:focus {
+  border-color: #00cfc1;
+  color: #00cfc1;
+}
+
+.btn-link {
+  text-decoration: underline;
+  color: #00cfc1;
+}
+
+.btn-link:hover,
+.btn-link:active,
+.btn-link:focus {
+  color: #007e75;
+}
+
+input {
+  padding: 5px 10px;
+}
+
+textarea {
+  width: 100%;
+  border: 3px solid black;
+  padding: 10px 15px;
+  border-radius: 3px;
+}
+
 .App {
   text-align: center;
   display: flex;
@@ -13,58 +94,6 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
-
-.users-container {
-  padding: 20px 30px;
-  background-color: #7070ff;
-  color: white;
-  border-radius: 5px;
-}
-
-.tweets-tabs {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 20px;
-}
-
-.tweet-card {
-  margin: 20px 0;
-  border-radius: 5px;
-  padding: 20px 40px;
-  background-color: #fafaff;
-  box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.09);
-}
-
-.tweet-card__meta {
-  display: flex;
-  justify-content: space-between;
-  color: #7070ff;
-}
-
-.tweet-card__meta-author {
-  color: #7070ff;
-}
-
-.tweet-card__message {
-  text-align: left;
-  color: #00007a;
-}
-
-.icon-container {
-  display: flex;
-  justify-content: space-evenly;
-  color: #7070ff;
-}
-
-.icon-container__contents {
-  display: flex;
-  align-items: center;
-}
-
-.icon-container__number {
-  margin: 0;
-  margin-left: 10px;
 }
 
 /* Reactstrap */

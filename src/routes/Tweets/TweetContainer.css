@@ -1,0 +1,50 @@
+.aside-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tweets-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 20px;
+}
+
+.tweet-card {
+  margin: 20px 0;
+  border-radius: 5px;
+  padding: 20px 40px;
+  background-color: #fafaff;
+  border: 3px solid #00cfc1;
+}
+
+.tweet-card__meta {
+  display: flex;
+  justify-content: space-between;
+  color: #007970;
+}
+
+.tweet-card__meta-author {
+  color: #007970;
+}
+
+.tweet-card__message {
+  text-align: left;
+  color: #007970;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: space-evenly;
+  color: #007970;
+}
+
+.icon-container__contents {
+  display: flex;
+  align-items: center;
+}
+
+.icon-container__number {
+  margin: 0;
+  margin-left: 10px;
+}

@@ -1,0 +1,27 @@
+.login-title {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #fe621d;
+  margin: 20px 0;
+  letter-spacing: 3px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  max-width: 300px;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+}
+
+.login-error {
+  color: #db0e0b;
+}
