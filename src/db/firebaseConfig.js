@@ -6,7 +6,17 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
 } from "firebase/auth";
-import { getDatabase, ref, set, onValue, get, child } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  set,
+  push,
+  get,
+  child,
+  query,
+  onValue,
+  orderByChild,
+} from "firebase/database";
 
 firebase.initializeApp({
   apiKey: "AIzaSyC-5_NGtjRrwLw4KxGOLO04GGAwMGRQHrs",
@@ -19,12 +29,56 @@ firebase.initializeApp({
 
 /* Database functions */
 const database = getDatabase();
-export function writeNewUser(uid, username, email) {
+export const writeNewUser = (uid, username, email) => {
   set(ref(database, "users/" + uid), {
     username,
     email,
   });
-}
+};
+
+export const writeNewTweet = async (message) => {
+  const user = await getCurrentUser();
+  const auth = getAuthUser();
+
+  const newPostKey = push(child(ref(database), "tweets")).key;
+  const date = new Date();
+
+  set(ref(database, "tweets/" + newPostKey), {
+    time: date.getTime(),
+    message,
+    date: {
+      fullDate: date.toString(),
+      day: date.getDate(),
+      month: date.getMonth(),
+      year: date.getFullYear(),
+    },
+    author: {
+      uid: auth.uid,
+      username: user.username,
+    },
+    usersFavorited: [],
+    comments: [],
+  });
+};
+
+// export const getAllTweetsOnce = async () => {
+//   const databaseRef = ref(database);
+//   const tweets = await get(child(databaseRef, "tweets"));
+//   if (tweets.exists()) {
+//     return tweets.val();
+//   }
+
+//   console.log("No data available");
+//   return null;
+// };
+
+export const watchAllTweets = async (successCallback) => {
+  const tweets = query(ref(database, "tweets"), orderByChild("time"));
+  onValue(tweets, (snapshot) => {
+    const data = snapshot.val();
+    successCallback(data);
+  });
+};
 
 /* Authenticator functions */
 const auth = getAuth();

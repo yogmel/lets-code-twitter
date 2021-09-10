@@ -48,6 +48,19 @@ h6 {
   color: #fff;
 }
 
+.btn-primary-inverted {
+  text-transform: uppercase;
+  border: 3px solid black;
+  color: #000;
+}
+
+.btn-primary-inverted:hover,
+.btn-primary-inverted:active,
+.btn-primary-inverted:focus {
+  border-color: #00cfc1;
+  color: #00cfc1;
+}
+
 .btn-link {
   text-decoration: underline;
   color: #00cfc1;
@@ -61,6 +74,13 @@ h6 {
 
 input {
   padding: 5px 10px;
+}
+
+textarea {
+  width: 100%;
+  border: 3px solid black;
+  padding: 10px 15px;
+  border-radius: 3px;
 }
 
 .App {

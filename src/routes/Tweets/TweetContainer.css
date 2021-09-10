@@ -1,3 +1,9 @@
+.aside-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .tweets-container {
   width: 100%;
   max-width: 600px;

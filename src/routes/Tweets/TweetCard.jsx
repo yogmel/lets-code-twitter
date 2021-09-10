@@ -7,11 +7,11 @@ import {
 
 function TweetCard(props) {
   const {
-    comments,
+    comments = [],
     message,
-    usersFavorited,
-    date,
-    author: { name, username },
+    usersFavorited = [],
+    date: { day, month, year },
+    author: { username },
   } = props.tweet;
 
   const temFavoritos = usersFavorited.length > 0;
@@ -20,10 +20,8 @@ function TweetCard(props) {
   return (
     <div className="tweet-card">
       <div className="tweet-card__meta">
-        <p className="tweet-card__meta-author">
-          {name} @{username}
-        </p>
-        <p className="tweet-card__meta-date">{date}</p>
+        <p className="tweet-card__meta-author">@{username}</p>
+        <p className="tweet-card__meta-date">{`${day}/${month}/${year}`}</p>
       </div>
 
       <p className="tweet-card__message">{message}</p>
