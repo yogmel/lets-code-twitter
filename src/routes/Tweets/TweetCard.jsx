@@ -2,6 +2,7 @@ import { IconsBar } from "./../../components";
 
 function TweetCard(props) {
   const {
+    key,
     comments = [],
     message,
     usersFavorited = [],
@@ -18,7 +19,12 @@ function TweetCard(props) {
 
       <p className="tweet-card__message">{message}</p>
 
-      <IconsBar comments={comments} usersFavorited={usersFavorited} />
+      <IconsBar
+        uid={key}
+        comments={comments}
+        author={username}
+        usersFavorited={usersFavorited}
+      />
     </div>
   );
 }

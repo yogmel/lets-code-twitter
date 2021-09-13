@@ -52,6 +52,7 @@ export const writeNewTweet = async (message) => {
   const date = new Date();
 
   set(ref(database, "tweets/" + newPostKey), {
+    key: newPostKey,
     time: date.getTime(),
     message,
     date: {
@@ -69,6 +70,16 @@ export const writeNewTweet = async (message) => {
   });
 };
 
+export const updateTweet = (uid, data) => {
+  console.log("data", data);
+  console.log("uid", uid);
+  set(ref(database, "tweets/" + uid + "/usersFavorited"), data);
+};
+
+export const removeTweet = async (uid) => {
+  set(ref(database, "tweets/" + uid), null);
+};
+
 export const watchAllTweets = async (successCallback) => {
   const tweets = query(ref(database, "tweets"), orderByChild("time"));
   onValue(tweets, (snapshot) => {
@@ -82,9 +93,11 @@ const auth = getAuth();
 const googleProvider = new GoogleAuthProvider();
 
 export const getAuthUser = () => auth.currentUser;
-export const getCurrentUser = async () => {
+export const getCurrentUser = async (uid) => {
   const databaseRef = ref(getDatabase());
-  const user = await get(child(databaseRef, `users/${auth.currentUser.uid}`));
+  const user = await get(
+    child(databaseRef, `users/${uid ?? auth.currentUser.uid}`)
+  );
   if (user.exists()) {
     return user.val();
   }
